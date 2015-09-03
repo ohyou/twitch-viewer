@@ -25,7 +25,7 @@ def getProxies():
 def getUrl():
 	# Getting the json with all data regarding the stream
 	try:
-		response = subprocess.Popen(["livestreamer", "twitch/tv/tv", "-j"], stdout=subprocess.PIPE).communicate()[0]
+		response = subprocess.Popen(["livestreamer", "twitch.tv/", "-j"], stdout=subprocess.PIPE).communicate()[0]
 	except subprocess.CalledProcessError as e:
 		print "An error has occurred while trying to get the stream data."
 		sys.exit(1)
