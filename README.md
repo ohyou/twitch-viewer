@@ -3,7 +3,7 @@ A viewer bot for twitch.tv
 
 ## Why
 This application was created in order to provide a little help to the beginner streamers. Having 0 viewers for months is very upsetting so why not give yourself several viewers?  
-The application was tested and developed to be used with less than 5 viewers with a very low CPU usage. Even though it can be used to get much more viewers, it was not intended by the developers.
+The application was tested and developed to be used with a small amount of viewers, for which it has a very low CPU usage. Even though it can be used to get much more viewers, it was not intended to do so by the developers.
 
 ## How
 The application was developed with Python 2.7.10 using the following libraries (installed using pip):
