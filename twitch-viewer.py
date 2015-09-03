@@ -1,13 +1,13 @@
 import requests, subprocess, json, sys, threading, time, random
 
-channel = "twitch.tv/"
+channel_url = "twitch.tv/"
 threads = []
 
 def getChannel():
 	# Reading the channel name - passed as an argument to this script
 	if len(sys.argv) >= 2:
 		global channel
-		channel += sys.argv[1]
+		channel_url += sys.argv[1]
 	else:
 		print "An error has occurred while trying to read arguments."
 		sys.exit(1)
@@ -25,7 +25,7 @@ def getProxies():
 def getUrl():
 	# Getting the json with all data regarding the stream
 	try:
-		response = subprocess.Popen(["livestreamer", channel , "-j"], stdout=subprocess.PIPE).communicate()[0]
+		response = subprocess.Popen(["livestreamer", channel_url , "-j"], stdout=subprocess.PIPE).communicate()[0]
 	except subprocess.CalledProcessError as e:
 		print "An error has occurred while trying to get the stream data."
 		sys.exit(1)
