@@ -48,9 +48,9 @@ def openUrl(url, proxy):
 		try:
 			requests.head(url, proxies=proxy)
 			print "Sent HEAD request with %s" % proxy["http"]
-		except requests.exceptions.Timeout as e:
+		except requests.exceptions.Timeout:
 			print "  Timeout error for %s" % proxy["http"]
-		except requests.exceptions.ConnectionError as e:
+		except requests.exceptions.ConnectionError:
 			print "  Connection error for %s" % proxy["http"]
 		
 def prepareThreads():
