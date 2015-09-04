@@ -1,12 +1,12 @@
-import requests, subprocess, json, sys, threading, time, random
+import requests, subprocess, json, sys, multiprocessing, time, random
 
 channel_url = "twitch.tv/"
-threads = []
+processes = []
 
 def getChannel():
 	# Reading the channel name - passed as an argument to this script
 	if len(sys.argv) >= 2:
-		global channel
+		global channel_url
 		channel_url += sys.argv[1]
 	else:
 		print "An error has occurred while trying to read arguments."
@@ -53,26 +53,26 @@ def openUrl(url, proxy):
 		except requests.exceptions.ConnectionError:
 			print "  Connection error for %s" % proxy["http"]
 		
-def prepareThreads():
-	global threads
+def prepareProcesses():
+	global processes
 	proxies = getProxies()
 
 	if len(proxies) < 1:
-		print "An error has occurred while preparing the threads: Not enough proxy servers."
+		print "An error has occurred while preparing the process: Not enough proxy servers."
 		sys.exit(1)
 	
 	for proxy in proxies:
-		# Preparing the thread and giving it its own proxy
-		threads.append(threading.Thread(target=openUrl, kwargs={"url" : getUrl(), "proxy" : {"http" : proxy}}))
+		# Preparing the process and giving it its own proxy
+		processes.append(multiprocessing.Process(target=openUrl, kwargs={"url" : getUrl(), "proxy" : {"http" : proxy}}))
 		
 if __name__ == "__main__":
 	getChannel()
-	prepareThreads()
+	prepareProcesses()
 	
-	# Starting up the threads
-	for thread in threads:
-		thread.daemon = True
-		thread.start()
+	# Starting up the processes
+	for process in processes:
+		process.daemon = True
+		process.start()
 	
 	# Running infinitely
 	while True:
