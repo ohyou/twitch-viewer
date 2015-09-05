@@ -28,4 +28,4 @@ The application starts working within ~10 seconds, and you will get viewers with
 - `An error has occurred while trying to process the response.` - something is wrong with the channel you provided, maybe wrong name or it is offline?
 - `An error has occurred while preparing the process: Not enough proxy servers.` - the application requiers 1 or more proxy in order to work
 - `Timeout error for IP` - your request was timed out. If it happens multiple time for the same proxy, consider replacing it
-- `Connection error for IP` - this is harmless, twitch sometimes refuses connection. This may occur frequently. Nothing to worry about.
+- `Connection error for IP` - this is harmless, proxy servers sometimes refuse connections. This may occur frequently. Nothing to worry about.
