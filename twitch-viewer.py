@@ -40,14 +40,15 @@ def getUrl():
 	return url
 
 def openUrl(url, proxy):
+	# Explicitly opening the session
+	session = requests.Session()
+	
+	# Sending a HEAD request and quit this loop on success
 	while True:
-		# Trying to make it look "realistic" by adding a random delay
-		time.sleep(random.randint(5, 15))
-		
-		# Sending the HEAD request using a specific proxy
 		try:
-			requests.head(url, proxies=proxy)
+			session.head(url, proxies=proxy)
 			print "Sent HEAD request with %s" % proxy["http"]
+			time.sleep(30)
 		except requests.exceptions.Timeout:
 			print "  Timeout error for %s" % proxy["http"]
 		except requests.exceptions.ConnectionError:
@@ -71,6 +72,7 @@ if __name__ == "__main__":
 	
 	# Starting up the processes
 	for process in processes:
+		time.sleep(random.randint(1, 5))
 		process.daemon = True
 		process.start()
 	
