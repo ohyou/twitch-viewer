@@ -43,7 +43,7 @@ def openUrl(url, proxy):
 	# Explicitly opening the session
 	session = requests.Session()
 	
-	# Sending a HEAD request and quit this loop on success
+	# Sending HEAD requests
 	while True:
 		try:
 			session.head(url, proxies=proxy)
@@ -68,7 +68,9 @@ def prepareProcesses():
 		
 if __name__ == "__main__":
 	getChannel()
+	print "Obtained the channel"
 	prepareProcesses()
+	print "Prepared the processes"
 	
 	# Starting up the processes
 	for process in processes:
