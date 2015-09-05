@@ -67,16 +67,13 @@ def get_url():
 
 
 def open_url(url, proxy):
-    # Explicitly opening the session
-    session = requests.Session()
-
     # Sending HEAD requests
     while True:
         try:
-            response = session.head(url, proxies=proxy)
+            with requests.Session() as s:
+                response = s.head(url, proxies=proxy)
             print "Sent HEAD request with %s" % proxy["http"]
             time.sleep(20)
-            response.connection.close()
         except requests.exceptions.Timeout:
             print "  Timeout error for %s" % proxy["http"]
         except requests.exceptions.ConnectionError:
