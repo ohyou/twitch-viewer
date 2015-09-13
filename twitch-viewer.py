@@ -32,7 +32,7 @@ def get_channel():
         global channel_url
         channel_url += sys.argv[1]
     else:
-        print "An error has occurred while trying to read arguments."
+        print "An error has occurred while trying to read arguments. Did you specify the channel?"
         sys.exit(1)
 
 
@@ -51,16 +51,18 @@ def get_url():
     # Getting the json with all data regarding the stream
     try:
         response = subprocess.Popen(
-            ["livestreamer", channel_url, "-j"], stdout=subprocess.PIPE).communicate()[0]
-    except subprocess.CalledProcessError as e:
-        print "An error has occurred while trying to get the stream data."
+            ["livestreamer.exe", channel_url, "-j"], stdout=subprocess.PIPE).communicate()[0]
+    except subprocess.CalledProcessError:
+        print "An error has occurred while trying to get the stream data. Is the channel online? Is the channel name correct?"
         sys.exit(1)
+    except OSError:
+        print "An error has occurred while trying to use livestreamer package. Is it installed? Do you have Python in your PATH variable?"
 
     # Decoding the url to the worst quality of the stream
     try:
         url = json.loads(response)['streams']['worst']['url']
     except (ValueError, KeyError):
-        print "An error has occurred while trying to process the response."
+        print "An error has occurred while trying to get the stream data. Is the channel online? Is the channel name correct?"
         sys.exit(1)
 
     return url
@@ -83,9 +85,10 @@ def open_url(url, proxy):
 def prepare_processes():
     global processes
     proxies = get_proxies()
+    n = 0
 
     if len(proxies) < 1:
-        print "An error has occurred while preparing the process: Not enough proxy servers."
+        print "An error has occurred while preparing the process: Not enough proxy servers. Need at least 1 to function."
         sys.exit(1)
 
     for proxy in proxies:
@@ -96,17 +99,29 @@ def prepare_processes():
                     "url": get_url(), "proxy": {
                         "http": proxy}}))
 
+        print '.',
+
+    print ''
+
 if __name__ == "__main__":
+    print "Obtaining the channel..."
     get_channel()
     print "Obtained the channel"
+    print "Preparing the processes..."
     prepare_processes()
     print "Prepared the processes"
+    print "Booting up the processes..."
+
+    # Timer multiplier
+    n = 8
 
     # Starting up the processes
     for process in processes:
-        time.sleep(random.randint(1, 5))
+        time.sleep(random.randint(1, 5) * n)
         process.daemon = True
         process.start()
+        if n > 1:
+            n -= 1
 
     # Running infinitely
     while True:
