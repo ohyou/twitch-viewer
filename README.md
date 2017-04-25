@@ -7,11 +7,18 @@ The application was tested and developed to be used with a small amount of viewe
 
 ## How
 The application was developed with Python 2.7.10 using the following libraries (installed using pip):
-- requests
-- json
-- livestreamer
+- pip install requests
+- pip install json
+- pip install livestreamer
+Note that json may be included into your python distributive.
+To test a packages for availability, type thise commands into console:
+- python
+- import json
+- import requests
+- import livestreamer
+If everything's fine, proceed.
 
-In order to run it, you need two things:
+In order to run the script, you need two things:
 - A twitch channel, which name you pass as an argument to this script. For example, if the URL to your page is `twitch.tv/myname`, you should pass just `myname`
 - A text file with the name `proxylist.txt` in the script's folder. Each line of which should have the following structure: `ip:port`.
 
