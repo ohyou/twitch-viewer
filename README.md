@@ -31,3 +31,14 @@ The application starts working within ~10 seconds, and you will get viewers with
 
 - `Timeout error for IP` - your request was timed out. If it happens multiple time for the same proxy, consider replacing it
 - `Connection error for IP` - this is harmless, proxy servers sometimes refuse connections. This may occur frequently. Nothing to worry about.
+
+## Project state
+
+The current state of the project: **on halt**.
+
+When the project was written, it was working and has been used by some. But it doesn't seem to work anymore, because Twitch is actively fighting these kinds of exploits.  
+Unwilling to keep up with Twitch changes, the project has been halted by the developer.
+
+If you are a developer, you are free to fork and modify the project, as well as use its code (according to the current license which can be found in the LICENSE file).
+
+Please refrain from creating new issues. Sorry for inconvinience.
