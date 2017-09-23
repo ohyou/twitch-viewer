@@ -36,7 +36,7 @@ The application starts working within ~10 seconds, and you will get viewers with
 
 The current state of the project: **on halt**.
 
-When the project was written, it was working and has been used by some. But it doesn't seem to work anymore, because Twitch is actively fighting these kinds of exploits.  
+When the project was first written, it was working and has been used by some. But it doesn't seem to work anymore, because Twitch is actively fighting these kinds of exploits.  
 Unwilling to keep up with Twitch changes, the project has been halted by the developer.
 
 If you are a developer, you are free to fork and modify the project, as well as use its code (according to the current license which can be found in the LICENSE file).
